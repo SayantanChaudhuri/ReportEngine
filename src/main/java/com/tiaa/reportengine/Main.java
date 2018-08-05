@@ -1,5 +1,6 @@
 package com.tiaa.reportengine;
 
+import java.io.File;
 import java.net.URISyntaxException;
 import java.nio.file.Paths;
 
@@ -12,6 +13,8 @@ public class Main {
 
 	public static void main(String[] args) {
 
+		System.out.println("Present Project Directory : "+ System.getProperty("user.dir"));
+		
 		setReportEngine(reportEngine);
 	}
 
@@ -25,6 +28,7 @@ public class Main {
 
 		try {
 			inputFileLocation = Paths.get(ClassLoader.getSystemResource(inputDirName).toURI()).toString();
+			
 		} catch (Exception e) {
 			throw new ReportException(e.getMessage());
 		}
@@ -37,7 +41,9 @@ public class Main {
 		String outputFileLocation = null;
 
 		try {
-			outputFileLocation = Paths.get(ClassLoader.getSystemResource(outputDirName).toURI()).toString();
+//			outputFileLocation = Paths.get(ClassLoader.getSystemResource(outputDirName).toURI()).toString();
+			outputFileLocation = Paths.get(System.getProperty("user.dir")+ File.separator + "src/main/resources/outputfiles").toString();
+			System.out.println("...outputFileLocation = " + outputFileLocation);
 		} catch (Exception e) {
 			throw new ReportException(e.getMessage());
 		}

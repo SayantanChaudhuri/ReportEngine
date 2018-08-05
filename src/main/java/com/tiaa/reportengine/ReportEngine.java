@@ -1,6 +1,7 @@
 package com.tiaa.reportengine;
 
 import java.io.File;
+import java.io.FileOutputStream;
 import java.io.IOException;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -141,7 +142,7 @@ public class ReportEngine {
 			CmfoodchainRoot root = new CmfoodchainRoot();
 			root.setCmfoodchain(cmfoodChain);
 			try {
-				mapper.writerWithDefaultPrettyPrinter().writeValue(new File(fileLocationPath+File.separator+ReportEngine.MISMATCHED_JSON_FILE), root);
+				mapper.writerWithDefaultPrettyPrinter().writeValue(new FileOutputStream(fileLocationPath+File.separator+ReportEngine.MISMATCHED_JSON_FILE), root);
 			} catch (IOException e) {
 				throw new ReportException(e.getMessage());
 			}
@@ -161,7 +162,7 @@ public class ReportEngine {
 			CmfoodchainRoot root = new CmfoodchainRoot();
 			root.setCmfoodchain(cmfoodChain);
 			try {
-				mapper.writerWithDefaultPrettyPrinter().writeValue(new File(fileLocationPath), root);
+				mapper.writerWithDefaultPrettyPrinter().writeValue(new FileOutputStream(fileLocationPath+File.separator+ReportEngine.MATCHED_JSON_FILE), root);
 			} catch (IOException e) {
 				throw new ReportException(e.getMessage());
 			}
