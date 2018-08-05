@@ -13,11 +13,4 @@ public class Cmfoodchain {
 	public void setBranch(List<Branch> branch) {
 		this.branch = branch;
 	}
-
-
-	@Override
-	public String toString() {
-		return "Cmfoodchain [branch=" + branch + "]";
-	}
-
 }

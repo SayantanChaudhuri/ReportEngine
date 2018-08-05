@@ -39,10 +39,4 @@ public class Branch {
 	public void setSumoforder(String sumoforder) {
 		this.sumoforder = sumoforder;
 	}
-
-	@Override
-	public String toString() {
-		return "Branch [location=" + location + ", totalcollection=" + totalcollection + ", sumoforder=" + sumoforder
-				+ ", locationid=" + locationid + "]";
-	}
 }

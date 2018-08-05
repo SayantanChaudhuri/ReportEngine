@@ -29,11 +29,4 @@ public class Branch {
 	public void setLocationid(String locationid) {
 		this.locationid = locationid;
 	}
-
-	@Override
-	public String toString() {
-		return "Branch [location=" + location + ", totalcollection=" + totalcollection + ", locationid=" + locationid
-				+ "]";
-	}
-
 }

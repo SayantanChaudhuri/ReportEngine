@@ -21,16 +21,18 @@ public class JSONFileReader implements Reader {
 	@Override
 	public Cmfoodchain readFile(String filePath) {
 		
+		Cmfoodchain r = null;
+		
 		try {
 			
 			ObjectMapper mapper = new ObjectMapper();
-			CmfoodchainRoot r = mapper.readValue(new File(filePath), CmfoodchainRoot.class);
+			CmfoodchainRoot root = mapper.readValue(new File(filePath), CmfoodchainRoot.class);
 			
-			return r.getCmfoodchain();
+			r = root.getCmfoodchain();
 		} catch (IOException e) {
 		}
 		
-		return null;
+		return r;
 	}
 
 	

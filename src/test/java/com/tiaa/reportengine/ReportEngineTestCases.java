@@ -1,8 +1,11 @@
 package com.tiaa.reportengine;
 
 import static org.junit.Assert.*;
-import static org.mockito.Mockito.*;
-
+import static org.mockito.Matchers.any;
+import static org.mockito.Mockito.doThrow;
+//import static org.mockito.Mockito.*;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 
 import java.net.URISyntaxException;
 import java.util.List;
@@ -12,14 +15,19 @@ import java.util.Set;
 import org.junit.Before;
 import org.junit.Test;
 import org.junit.runner.RunWith;
+import org.mockito.BDDMockito;
 import org.mockito.Mock;
 import org.mockito.runners.MockitoJUnitRunner;
+import org.powermock.api.mockito.PowerMockito;
+import static org.powermock.api.mockito.PowerMockito.*;
+import org.powermock.modules.junit4.PowerMockRunner;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
+import com.tiaa.reportengine.exception.ReportException;
 import com.tiaa.reportengine.model.input.json.Cmfoodchain;
 import com.tiaa.reportengine.model.output.json.Branch;
 
-@RunWith(MockitoJUnitRunner.class)
+@RunWith(PowerMockRunner.class)
 public class ReportEngineTestCases {
 
 	@Mock
@@ -61,20 +69,41 @@ public class ReportEngineTestCases {
 		
 //		chainDetails.add(chain1);
 //		chainDetails.add(chain2);
+	}
+	
+	@Test(expected=ReportException.class) 
+	public void testMainGetInputFileLocationForException() {
 		
+		doNothing().doThrow(ReportException.class).when(Main.class);
+		Main.getInputFileLocation(null);
+	}
+	
+	@Test(expected=ReportException.class) 
+	public void testMainGetOutputFileLocationForException() {
 		
+		doNothing().doThrow(ReportException.class).when(Main.class);
+		Main.getOutputFileLocation(null);
 	}
 
 	@Test(expected=Exception.class)
 	public void testMainMethod() throws Exception {
 		
-		Main.main(null);
+		PowerMockito.mockStatic(Main.class);
+		
+		PowerMockito.when(Main.class, "getInputFileLocation", any(String.class)).thenReturn(fileLocationPath);
+		PowerMockito.when(Main.class, "getOutputFileLocation", any(String.class)).thenReturn(fileLocationPath);
+		doNothing().when(Main.class, "setReportEngine", any(ReportEngine.class));
+		
+		verifyStatic(Main.class);
+		
+		Main.getInputFileLocation("inputfiles");
+		Main.getOutputFileLocation("outputfiles");
+		Main.setReportEngine(reportEngine);
+		
 	}
 	
 	@Test
 	public void testReportEngine() {
-		
-		
 		
 		when(reportEngine.getFileList(fileLocationPath)).thenReturn(returnFileList);
 		when(reportEngine.readFiles(fileLocationPath, returnFileList)).thenReturn(chainDetails);

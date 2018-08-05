@@ -13,25 +13,17 @@ import com.tiaa.reportengine.model.input.json.Cmfoodchain;
 
 public class XMLFileReader implements Reader {
 
-	private static XMLFileReader reader  = new XMLFileReader(); ;
+	private static XMLFileReader reader  = new XMLFileReader();
 	
 	private XMLFileReader() {
 	}
 
 	public static XMLFileReader getInstance() {
 		
-		if(reader == null) {
-			reader = new XMLFileReader();
-		}
 		return reader;
 	}
 	
-	@SuppressWarnings("unchecked")
 	public Cmfoodchain readFile(String filePath) {
-		
-		if(reader == null) {
-			throw new ReportException("Error: XMLFileReader Instance creation");
-		}
 		
 		try {
 			

@@ -13,9 +13,4 @@ public class Orders {
 	public void setOrderdetail(List<Orderdetail> orderdetail) {
 		this.orderdetail = orderdetail;
 	}
-
-	@Override
-	public String toString() {
-		return "Orders [orderdetail=" + orderdetail + "]";
-	}
 }

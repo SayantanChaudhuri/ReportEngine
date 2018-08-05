@@ -24,9 +24,4 @@ public class Orderdetail {
 	public void setBillamount(String billamount) {
 		this.billamount = billamount;
 	}
-
-	@Override
-	public String toString() {
-		return "Orderdetail [orderid=" + orderid + ", billamount=" + billamount + "]";
-	}
 }

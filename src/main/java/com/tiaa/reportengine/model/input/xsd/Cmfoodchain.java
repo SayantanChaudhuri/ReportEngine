@@ -26,9 +26,4 @@ public class Cmfoodchain {
 	public void setOrders(Orders orders) {
 		this.orders = orders;
 	}
-
-	@Override
-	public String toString() {
-		return "Cmfoodchain [branch=" + branch + ", orders=" + orders + "]";
-	}
 }
